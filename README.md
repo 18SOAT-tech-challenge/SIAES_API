@@ -11,7 +11,7 @@
 
 - [Objetivo do Projeto](#-objetivo-do-projeto)
 - [Descrição da Solução](#-descrição-da-solução)
-- [Arquitetura](#️-arquitetura)
+- [Arquitetura](#arquitetura)
 - [Tecnologias Utilizadas](#-tecnologias-utilizadas)
 - [Pré-requisitos](#-pré-requisitos)
 - [Instruçõe Gerais para Execução](#-instruções-gerais-para-execução)
@@ -99,7 +99,7 @@ stateDiagram-v2
 
 ---
 
-## 🏛️ Arquitetura
+## Arquitetura
 
 O projeto adota os padrões **Clean Architecture** e **Ports and Adapters (Hexagonal)**, alinhados aos princípios táticos e estratégicos do **Domain-Driven Design (DDD)**:
 
