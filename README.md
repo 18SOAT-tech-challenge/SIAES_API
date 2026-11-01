@@ -17,7 +17,7 @@
 - [Instruçõe Gerais para Execução](#-instruções-gerais-para-execução)
 - [Instruções para Execução dos Testes](#-instruções-para-execução-dos-testes)
 - [Documentação da API (Swagger & Endpoints)](#-documentação-da-api-swagger--endpoints)
-- [Banco de Dados — Decisão e Justificativa (ADR 001)](#️-banco-de-dados--decisão-e-justificativa-adr-001)
+- [Banco de Dados — Decisão e Justificativa (ADR 001)](#-banco-de-dados--decisão-e-justificativa-adr-001)
 - [Autenticação e Credenciais de Demonstração](#-autenticação-e-credenciais-de-demonstração)
 - [Estrutura do Projeto](#-estrutura-do-projeto)
 - [Documentação DDD e C4 Model](#-documentação-ddd-e-arquitetura-c4-model)
@@ -99,7 +99,7 @@ stateDiagram-v2
 
 ---
 
-## 🏛️ Arquitetura
+## ⚙️ Arquitetura
 
 O projeto adota os padrões **Clean Architecture** e **Ports and Adapters (Hexagonal)**, alinhados aos princípios táticos e estratégicos do **Domain-Driven Design (DDD)**:
 
