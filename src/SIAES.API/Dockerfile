@@ -1,8 +1,9 @@
 FROM mcr.microsoft.com/dotnet/aspnet:10.0-alpine AS base
+RUN apk add --no-cache icu-libs icu-data-full
 USER $APP_UID
 WORKDIR /app
 EXPOSE 8080
-ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=true
+ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
 
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 ARG BUILD_CONFIGURATION=Release

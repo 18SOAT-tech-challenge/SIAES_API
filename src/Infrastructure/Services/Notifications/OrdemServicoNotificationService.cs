@@ -14,11 +14,29 @@ public class OrdemServicoNotificationService(
     IVeiculoRepository veiculoRepository,
     ILogger<OrdemServicoNotificationService> logger) : IOrdemServicoNotificationService
 {
-    private static readonly CultureInfo PtBrCulture = new("pt-BR");
+    private static readonly CultureInfo PtBrCulture = ObterCulturaPtBr();
     private readonly IResendEmailService _emailService = emailService;
     private readonly IClienteRepository _clienteRepository = clienteRepository;
     private readonly IVeiculoRepository _veiculoRepository = veiculoRepository;
     private readonly ILogger<OrdemServicoNotificationService> _logger = logger;
+
+    private static CultureInfo ObterCulturaPtBr()
+    {
+        try
+        {
+            return new CultureInfo("pt-BR");
+        }
+        catch
+        {
+            var culture = (CultureInfo)CultureInfo.InvariantCulture.Clone();
+            culture.NumberFormat.CurrencySymbol = "R$ ";
+            culture.NumberFormat.CurrencyDecimalSeparator = ",";
+            culture.NumberFormat.CurrencyGroupSeparator = ".";
+            culture.NumberFormat.NumberDecimalSeparator = ",";
+            culture.NumberFormat.NumberGroupSeparator = ".";
+            return culture;
+        }
+    }
 
     private readonly record struct NotificationContext(
         string Assunto,
