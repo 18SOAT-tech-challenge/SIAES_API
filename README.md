@@ -17,6 +17,7 @@
 - [Instruçõe Gerais para Execução](#-instruções-gerais-para-execução)
 - [Instruções para Execução dos Testes](#-instruções-para-execução-dos-testes)
 - [Documentação da API (Swagger & Endpoints)](#-documentação-da-api-swagger--endpoints)
+- [Qualidade de Código & Vulnerabilidades (SonarCloud)](#️-qualidade-de-código-e-análise-de-vulnerabilidades)
 - [Banco de Dados — Decisão e Justificativa (ADR 001)](#️-banco-de-dados--decisão-e-justificativa-adr-001)
 - [Autenticação e Credenciais de Demonstração](#-autenticação-e-credenciais-de-demonstração)
 - [Estrutura do Projeto](#-estrutura-do-projeto)
@@ -34,7 +35,8 @@ A solução substitui controles manuais e desorganizados (baseados em blocos de 
 
 ### 🛠️ Problemas Resolvidos pela Solução
 
-* **Perda de histórico e erros na triagem**: Falta de rastreabilidade de veículos e clientes, gerando retrabalho e diagnósticos imprecisos.
+- **Perda de histórico e erros na triagem**: Falta de rastreabilidade de veículos e clientes, gerando retrabalho e diagnósticos imprecisos.
+
 - **Furos no controle de estoque**: Peças retiradas sem baixa transacional ou duplicidade de uso por falta de controle de reserva.
 - **Ineficiência no fluxo de orçamentos**: Morosidade no cálculo de peças e mão de obra, além de autorizações informais de clientes sem registro oficial.
 - **Falta de transparência para o cliente**: Dificuldade em acompanhar em tempo real o status de execução e término da manutenção do veículo.
@@ -47,13 +49,15 @@ O **SIAES** orquestra ponta a ponta as rotinas operacionais de uma oficina mecâ
 
 ### 1. Gestão de Clientes e Veículos (Conformidade LGPD)
 
-* Cadastro completo de clientes com validação de **CPF ou CNPJ** por meio do Objeto de Valor (`Documento`).
+- Cadastro completo de clientes com validação de **CPF ou CNPJ** por meio do Objeto de Valor (`Documento`).
+
 - **Proteção de Dados Sensíveis**: o `Documento` do cliente e a `Placa` do veículo são gravados com **criptografia AES-256 determinística** (o que permite busca por igualdade e índice único) e possuem representação mascarada (ex.: `529.***.***-25`).
 - Cadastro de veículos vinculados ao cliente contendo Placa (padrão antigo ou Mercosul), Marca, Modelo e Ano.
 
 ### 2. Catálogo de Serviços e Controle de Estoque
 
-* **Catálogo de Serviços**: cadastro de tipos de serviço (ex.: troca de óleo e filtros, alinhamento e balanceamento). O valor do serviço é informado ao incluí-lo na OS.
+- **Catálogo de Serviços**: cadastro de tipos de serviço (ex.: troca de óleo e filtros, alinhamento e balanceamento). O valor do serviço é informado ao incluí-lo na OS.
+
 - **Estoque Transacional com Reserva**: controle de saldo físico (`QuantidadeEmEstoque`) e saldo reservado (`QuantidadeReservada`), com concorrência otimista. Ao vincular uma peça a uma OS, o saldo disponível é imediatamente reservado para evitar uso duplicado.
 
 ### 3. Ciclo de Vida da Ordem de Serviço (OS)
@@ -84,18 +88,19 @@ stateDiagram-v2
 
 ### 4. Fluxo de Notificações por E-mail (Integração Resend)
 
-* Notificação automática ao cliente via **Resend**, com templates HTML responsivos, nos momentos críticos do atendimento:
+- Notificação automática ao cliente via **Resend**, com templates HTML responsivos, nos momentos críticos do atendimento:
   - **Orçamento Disponível para Aprovação**: E-mail detalhado com tabela discriminada de serviços, peças, valores unitários e valor total da OS, com instruções claras para autorização.
   - **Veículo Recebido**: Confirmação da entrada do veículo na oficina e início da triagem.
   - **Orçamento Aprovado**: Confirmação do início da execução dos serviços pela equipe técnica.
   - **Orçamento Rejeitado / Cancelamento**: Confirmação do cancelamento e liberação do veículo.
   - **Veículo Pronto para Retirada**: Notificação de conclusão dos serviços com horário e local de retirada.
   - **Veículo Entregue**: Confirmação de encerramento do atendimento e agradecimento.
+
 - **Resiliência**: o envio ocorre **após** a persistência da operação e é aguardado dentro da requisição (sem fila). Cliente sem e-mail cadastrado é ignorado (log informativo); falhas do provedor são capturadas e registradas em log de erro, sem interromper nem desfazer a operação de negócio já gravada.
 
 ### 5. Consulta Pública de Status
 
-* Endpoints públicos que permitem ao cliente consultar o status atual da sua OS em tempo real informando o **ID da Ordem de Serviço** ou o **CPF/CNPJ**, garantindo transparência sem exigir credenciais administrativas.
+- Endpoints públicos que permitem ao cliente consultar o status atual da sua OS em tempo real informando o **ID da Ordem de Serviço** ou o **CPF/CNPJ**, garantindo transparência sem exigir credenciais administrativas.
 
 ---
 
@@ -211,13 +216,13 @@ docker-compose up -d --build
 
 ## 🧪 Instruções para Execução dos Testes
 
-O projeto conta com **406 testes automatizados** cobrindo isoladamente as regras do domínio, os casos de uso da aplicação, integrações com segurança, arquitetura e **98,6% de cobertura de código em testes de integração nos principais controllers e endpoints HTTP**, mantendo **100% de taxa de sucesso**.
+O projeto conta com **414 testes automatizados** cobrindo isoladamente as regras do domínio, os casos de uso da aplicação, integrações com segurança, arquitetura e controle transacional, mantendo **100% de taxa de sucesso** e **100% de cobertura nos domínios críticos**.
 
 ```
-Passed! - Failed: 0, Passed: 186, Total: 186 - Domain.UnitTests.dll
-Passed! - Failed: 0, Passed: 121, Total: 121 - Application.UnitTests.dll
-Passed! - Failed: 0, Passed:  99, Total:  99 - IntegrationTests.dll
-Total: 406 testes passando
+Passed! - Failed: 0, Passed: 185, Total: 185 - Domain.UnitTests.dll
+Passed! - Failed: 0, Passed: 125, Total: 125 - Application.UnitTests.dll
+Passed! - Failed: 0, Passed: 104, Total: 104 - IntegrationTests.dll
+Total: 414 testes passando (0 falhas)
 ```
 
 ### Executar todos os testes da solução
@@ -246,8 +251,13 @@ dotnet test tests/IntegrationTests
 Com a aplicação rodando, acesse a documentação interativa:
 
 ```
-http://localhost:8082/swagger
+http://localhost:8082/swagger  # (ou http://localhost:5180/swagger em execução local)
 ```
+
+> ⚡ **Suítes de Testes End-to-End Prontas**:
+>
+> - **Insomnia**: Arquivo [`docs/insomnia/Insomnia_SIAES_Collection.json`](docs/insomnia/Insomnia_SIAES_Collection.json) (ver [Guia Insomnia](docs/insomnia/README.md))
+> - **Thunder Client**: Arquivo [`docs/thunder-client/thunder-collection_SIAES.json`](docs/thunder-client/thunder-collection_SIAES.json) (ver [Guia Thunder Client](docs/thunder-client/README.md))
 
 ### Principais Grupos de Endpoints
 
@@ -270,6 +280,7 @@ http://localhost:8082/swagger
 | | `POST` | `/api/v1/ordens-servico/{id}/rejeitar` | Rejeita orçamento, cancela OS e **libera reservas de estoque** |
 | | `POST` | `/api/v1/ordens-servico/{id}/finalizar` | Finaliza serviços, **baixa estoque físico** e notifica cliente |
 | | `POST` | `/api/v1/ordens-servico/{id}/entregar` | Registra entrega do veículo e encerra OS (`Entregue`) |
+| | `GET` | `/api/v1/ordens-servico/metricas/tempo-medio-execucao` | **Métrica**: Tempo médio de execução das OS finalizadas |
 | **Clientes** | `CRUD` | `/api/v1/Clientes` | Gestão de clientes com validação e criptografia de documento |
 | **Veículos** | `CRUD` | `/api/v1/Veiculos` | Gestão de veículos e vínculo com clientes |
 | **Estoque** | `CRUD` | `/api/v1/ItensEstoque` | Gestão de itens de estoque (`POST /{id}/entradas` registra entrada) |
@@ -280,13 +291,31 @@ http://localhost:8082/swagger
 
 ---
 
+## 🛡️ Qualidade de Código e Análise de Vulnerabilidades
+
+A qualidade da solução e a ausência de vulnerabilidades de segurança são monitoradas e validadas continuamente via pipeline de CI no **GitHub Actions** e inspecionadas no **SonarCloud**:
+
+- 🔗 **Painel Oficial SonarCloud (Branch `main`)**: [https://sonarcloud.io/summary/overall?id=marcoswferreira_18SOAT_TechChallenge&branch=main](https://sonarcloud.io/summary/overall?id=marcoswferreira_18SOAT_TechChallenge&branch=main)
+
+| Indicador de Qualidade | Resultado Obtido | Requisito do Edital | Status |
+| :--- | :---: | :---: | :---: |
+| **Quality Gate** | **Passed** | Passed | ✅ Aprovado |
+| **Cobertura Geral de Código** | **84.9%** | $\ge 80.0\%$ | ✅ Aprovado |
+| **Cobertura Domínios Críticos** | **100.0%** | $\ge 80.0\%$ | ✅ Aprovado |
+| **Vulnerabilidades de Segurança** | **0 open issues (Rating A)** | 0 | ✅ Aprovado |
+| **Confiabilidade (Bugs)** | **0 open issues (Rating A)** | 0 | ✅ Aprovado |
+| **Manutenibilidade** | **Rating A** | Rating A | ✅ Aprovado |
+| **Security Hotspots** | **0** | 0 | ✅ Aprovado |
+| **Duplicações de Código** | **0.0%** | $< 3.0\%$ | ✅ Aprovado |
+
 ## 🗄️ Banco de Dados — Decisão e Justificativa (ADR 001)
 
 Para a camada de persistência do **SIAES**, foi adotado o **PostgreSQL 16** integrado ao **Entity Framework Core 10**.
 
 ### Resumo da Justificativa Técnica
 
-* **Garantias ACID e Consistência de Estoque**: Operações de reserva e baixa de peças exigem atomicidade e isolamento para evitar inconsistências sob concorrência.
+- **Garantias ACID e Consistência de Estoque**: Operações de reserva e baixa de peças exigem atomicidade e isolamento para evitar inconsistências sob concorrência.
+
 - **Mapeamento Natural de Agregados do DDD**: O modelo relacional suporta perfeitamente as fronteiras dos agregados (`OrdemServico`, `Cliente`, `ItemEstoque`, `Veiculo`) com integridade referencial estrita e otimização de consultas com `AsSplitQuery()`.
 - **Concorrência no Estoque**: `ItemEstoque` usa *row version* (`xmin` do PostgreSQL) como controle de concorrência otimista, evitando que duas OS reservem o mesmo saldo simultaneamente; a integração com .NET é feita pelo driver `Npgsql`.
 
@@ -394,6 +423,10 @@ A API utiliza autenticação JWT com controle de acesso por perfis (`Roles`): `A
 
 ## 📐 Documentação DDD e Arquitetura (C4 Model)
 
+- **Boards Oficiais do Event Storming no Miro (Públicos)**:
+  - 📋 **Criação e Acompanhamento da Ordem de Serviço**: [https://miro.com/app/board/uXjVHntHpys=/](https://miro.com/app/board/uXjVHntHpys=/)
+  - 📦 **Gestão de Peças e Insumos (Estoque)**: [https://miro.com/app/board/uXjVHrbvJdE=/](https://miro.com/app/board/uXjVHrbvJdE=/)
+
 A documentação detalhada de **Domain-Driven Design** e **Arquitetura (C4 Model)** desenvolvida pelo grupo encontra-se em [`docs/`](docs/):
 
 | Documento | Nível / Assunto | Descrição |
@@ -418,7 +451,7 @@ A documentação detalhada de **Domain-Driven Design** e **Arquitetura (C4 Model
 
 O vídeo demonstrativo com a explicação da arquitetura, fluxo de execução, testes automatizados e funcionamento prático do MVP está disponível no YouTube:
 
-📹 **[Assistir ao vídeo da entrega no YouTube](https://youtube.com/todo)** *(preencher com o link do vídeo final)*
+📹 **[Assistir ao vídeo da entrega no YouTube](https://youtu.be/XpSmhnse7KE)**
 
 ---
 
