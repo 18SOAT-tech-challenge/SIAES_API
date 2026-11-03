@@ -32,7 +32,7 @@
 * **Link do Repositório GitHub**: [https://github.com/marcoswferreira/18SOAT_TechChallenge](https://github.com/marcoswferreira/18SOAT_TechChallenge)
 * **Status do Repositório**: Público
 * **Branch de Entrega**: `main`
-* **Commit Hash da Versão Final**: `b113e4d` (ou versão tag correspondente)
+* **Commit Hash da Versão Final**: `627646c` (ou versão tag correspondente)
 * **Políticas de Proteção de Branch**: A branch `main` é estritamente protegida; todas as alterações foram consolidadas via **Pull Requests revisados**, passando por validação de build, testes automatizados e análise de código no GitHub Actions.
 
 ---

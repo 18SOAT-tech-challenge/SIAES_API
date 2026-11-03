@@ -43,7 +43,7 @@ Antes de iniciar a gravação (usando OBS Studio, Loom, Clipchamp ou similar), d
 | 13 | **A alteração dos status da OS (Recebida até Entregue) e consultas públicas** | `11:00 - 11:45` |
 | 14 | **Os testes automatizados (Domain, Application, Integration)** | `11:45 - 12:30` |
 | 15 | **O resultado da análise de vulnerabilidades (SonarCloud)** | `12:30 - 13:15` |
-| - | **Commit informado no PDF (`b113e4d`) e Encerramento** | `13:15 - 13:30` |
+| - | **Commit informado no PDF (`627646c`) e Encerramento** | `13:15 - 13:30` |
 
 ---
 
@@ -265,14 +265,14 @@ Executar a sequência de requisições no Swagger ou através da collection do I
 
    ```bash
    git log -1 --oneline
-   # Exibindo o commit informado no PDF (ex.: b113e4d)
+   # Exibindo o commit informado no PDF (ex.: 627646c)
    ```
 
 2. Voltar à tela inicial ou ao documento [`docs/ENTREGA_FASE1.md`](ENTREGA_FASE1.md).
 
 #### 🎙️ O que falar
 >
-> *"Toda a demonstração realizada neste vídeo corresponde rigorosamente à versão da branch `main` no commit **`b113e4d`**, conforme informado no nosso documento oficial de entrega em PDF.*
+> *"Toda a demonstração realizada neste vídeo corresponde rigorosamente à versão da branch `main` no commit **`627646c`**, conforme informado no nosso documento oficial de entrega em PDF.*
 >
 > *Agradecemos a atenção dos professores e da banca avaliadora da FIAP. O repositório e todos os artefatos de documentação estão disponíveis publicamente no GitHub para revisão detalhada. Muito obrigado!"*
 
