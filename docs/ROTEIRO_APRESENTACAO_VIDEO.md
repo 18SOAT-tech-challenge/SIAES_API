@@ -62,7 +62,7 @@ Antes de iniciar a gravação (usando OBS Studio, Loom, Clipchamp ou similar), d
 
 #### 🎙️ O que falar
 >
-> *"Olá a todos e bem-vindos à apresentação do projeto **SIAES** — Sistema Integrado de Atendimento e Execução de Serviços, desenvolvido para a Fase 1 do Tech Challenge da Pós-Graduação em Software Architecture da FIAP, Turma 18SOAT.*
+> *"Olá a todos e bem-vindos à apresentação do projeto desenvolvido para a Fase 1 do Tech Challenge da Pós-Graduação em Software Architecture da FIAP.*
 >
 > *Nós somos o **Grupo 21**, composto por:*
 >

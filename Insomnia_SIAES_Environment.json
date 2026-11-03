@@ -1,0 +1,26 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2026-11-02T22:03:00.000Z",
+  "__export_source": "insomnia.desktop.app:v13.3.1",
+  "resources": [
+    {
+      "_id": "env_siaes_sub_local",
+      "parentId": "env_base_id",
+      "modified": 1793667308866,
+      "created": 1793667308866,
+      "name": "SIAES - Local Development",
+      "data": {
+        "baseUrl": "http://localhost:5180",
+        "adminEmail": "admin@siaes.com",
+        "adminPassword": "SenhaAdmin1!",
+        "clienteDocumento": "52998224725",
+        "veiculoPlaca": "SIA2E26"
+      },
+      "color": "#7d69cb",
+      "isPrivate": false,
+      "metaSortKey": 1793667308866,
+      "_type": "environment"
+    }
+  ]
+}
