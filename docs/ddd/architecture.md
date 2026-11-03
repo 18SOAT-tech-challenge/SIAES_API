@@ -200,7 +200,7 @@ Cada mudança de status gera um `RegistroStatus` (status anterior, novo status e
 
 ## 6. Tecnologias Utilizadas
 
-- **Linguagem / plataforma**: C# / .NET 10
+- **Linguagem / plataforma**: C# 14 / .NET 10
 - **Web**: ASP.NET Core Web API com versionamento (`Asp.Versioning`) e Swagger (Swashbuckle)
 - **Persistência**: Entity Framework Core 10 + Npgsql (PostgreSQL 16)
 - **E-mail transacional**: Resend (.NET SDK)
