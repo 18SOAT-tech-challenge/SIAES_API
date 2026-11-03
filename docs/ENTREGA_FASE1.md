@@ -11,7 +11,7 @@
 | **Número do Grupo** | Grupo 21 |
 | **Linguagem Principal** | C# 13 (.NET 10 LTS) |
 | **Tecnologias Utilizadas** | ASP.NET Core Web API, Entity Framework Core 10, PostgreSQL 16, Docker, Testcontainers, xUnit, NSubstitute, SonarCloud, Resend API |
-| **Data de Entrega** | Outubro / 2026 |
+| **Data de Entrega** | Novembro / 2026 |
 
 <br />
 
@@ -39,7 +39,7 @@
 
 ### 3. Vídeo da Entrega
 
-* **Link do Vídeo no YouTube**: [https://youtube.com/todo](https://youtube.com/todo) *(Link público com duração máxima de 15 minutos)*
+* **Link do Vídeo no YouTube**: [https://youtu.be/XpSmhnse7KE](https://youtu.be/XpSmhnse7KE) *(Link público com duração máxima de 15 minutos)*
 * **Duração**: Menor ou igual a 15 minutos
 * **Visibilidade**: Público (sem restrição de acesso ou senha)
 * **Conteúdo Demonstrado no Vídeo**:

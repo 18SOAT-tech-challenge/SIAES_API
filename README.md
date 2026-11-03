@@ -451,7 +451,7 @@ A documentação detalhada de **Domain-Driven Design** e **Arquitetura (C4 Model
 
 O vídeo demonstrativo com a explicação da arquitetura, fluxo de execução, testes automatizados e funcionamento prático do MVP está disponível no YouTube:
 
-📹 **[Assistir ao vídeo da entrega no YouTube](https://youtube.com/todo)** *(preencher com o link do vídeo final)*
+📹 **[Assistir ao vídeo da entrega no YouTube](https://youtu.be/XpSmhnse7KE)**
 
 ---
 
