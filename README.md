@@ -17,6 +17,7 @@
 - [Instruçõe Gerais para Execução](#-instruções-gerais-para-execução)
 - [Instruções para Execução dos Testes](#-instruções-para-execução-dos-testes)
 - [Documentação da API (Swagger & Endpoints)](#-documentação-da-api-swagger--endpoints)
+- [Qualidade de Código & Vulnerabilidades (SonarCloud)](#️-qualidade-de-código-e-análise-de-vulnerabilidades)
 - [Banco de Dados — Decisão e Justificativa (ADR 001)](#️-banco-de-dados--decisão-e-justificativa-adr-001)
 - [Autenticação e Credenciais de Demonstração](#-autenticação-e-credenciais-de-demonstração)
 - [Estrutura do Projeto](#-estrutura-do-projeto)
